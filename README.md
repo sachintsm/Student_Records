@@ -34,14 +34,14 @@ program should display a menu that has the following options:
       4. Save Summaries
       5. Exit Program
 ### Option One (1) 
-    is selected when the user wants to display a specific subject’s details. The
+  is selected when the user wants to display a specific subject’s details. The
 user is prompted to enter a 7 character subject code that is searched for in the array. If found,
 all details of that subject are displayed (i.e. Student IDs, Marks, Grades), or alternatively an
 error message displayed. These details should be held on the screen until the user presses a key
 to continue, at which point the menu is to be redisplayed.
 
 ### Option two (2) 
-    is selected when the user wants to display a single student’s details. The user
+  is selected when the user wants to display a single student’s details. The user
 is prompted to enter a student number that is searched for in each of the subjects. The first two
 digits of the student number represents last two digits of the year. Details of results in each
 subject should be displayed if the student is found or an error message displayed. These details
@@ -49,14 +49,14 @@ should be held on the screen until the user presses a key to continue, at which 
 is to be redisplayed.
 
 ### Option three (3) 
-    is selected when the user wants to display the summary of details from a
+  is selected when the user wants to display the summary of details from a
 specific subject. The user is prompted to enter a subject code that is searched for in the array.
 If found, a listing indicating the average mark, Standard deviation and number of each grade
 allocated is displayed. These details should be held on the screen until the user presses a key to
 continue, at which point the menu is to be redisplayed.
 
 ### Option four (4) 
-    is selected when the user wishes to save on disk the summaries of all subjects.
+ is selected when the user wishes to save on disk the summaries of all subjects.
 The details are to be saved in the file (summdata.txt). Refer the following example which
 indicates the format of the file.
 
@@ -75,6 +75,7 @@ Constant values and file format
     
 So that you know how to read the data from the file subjdata.txt the following format has been
 adopted:
+
     SCS1201 50
     17000001 23
     17000002 43
