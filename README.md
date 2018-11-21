@@ -66,7 +66,9 @@ indicates the format of the file.
       
 There should be a single space between each of the values on each line. The data shown here
 corresponds to the example shown indicating the format of the input file.
-Option five (5) is selected when the user wishes to exit the program.
+
+### Option five (5) 
+   is selected when the user wishes to exit the program.
 Constant values and file format
 
 ## The following declarations need to be included in your program:
