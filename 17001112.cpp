@@ -5,19 +5,29 @@
 
 using namespace std;
 
-void openFile();
-void subject();
-void student();
-void disSubSummary();
-void save();
-
 const int MAXSUBJECTS = 10;
 const int MAXSTUDENTS = 100;
 
+class student{
+    public:
+        //student();
+        void openFile();
+        void subject();
+        void stu_data();
+        void disSubSummary();
+        void save();
+    private:
+        int index;
+        int marks;
+        int stu_count;
+        string sub;
+    protected:
+
+};
 int main(){
     int option;
-
-    //openFile();
+    student stu;
+    stu.openFile();
 
     cout << "Hello Friend, Choose your option !!!" << endl;
         do{
@@ -25,16 +35,16 @@ int main(){
             cin >> option;
             switch(option){
                 case 1:
-                    subject();
+                    stu.subject();
                     break;
                 case 2:
-                    student();
+                    stu.stu_data();
                     break;
                 case 3:
-                    disSubSummary();
+                    stu.disSubSummary();
                     break;
                 case 4:
-                    save();
+                    stu.save();
                     break;
                 case 5:
                     return EXIT_FAILURE;
@@ -43,42 +53,50 @@ int main(){
                 cout<<"Please, Enter valid option !" << endl;
             }
         }while(option != 5);
-
     return 0;
 }
-void openFile(){
+void student::openFile(){
     const int size = 20 ;
-    int stuArray[size];
+    int subjects_A[MAXSUBJECTS];
+    int students_A[MAXSTUDENTS];
+    int i;
     int count = 0;
+    cout << "file is open"<<endl;
 
     ifstream stuFile;
     stuFile.open("test.txt");
+    
     if(stuFile.is_open()){
-        for(int count=0; count<size; count++){
-            stuFile >> stuArray[count];
+        while(stuFile >> subjects_A[i]){
+            while(stuFile >> students_A[i]){
+                i++;
+            } 
         }
-        stuFile.close();
-
-        for(count =0; count<size; count++){
-            cout << stuArray[count] << "\n";
-            count = count+1;
+        for(int j =0; j<size ; j++){
+            cout << subjects_A[j] << "\n";
         }
-    }
+        //     stuFile >> stuArray[count];
+        //     count++;            
+        // }
+        // while(stuArray[count] >> index >> marks){
+        //     cout << index << ' ' << marks ;
+        // }
+        }
     else{
         cout << "Your file is not open successfully"<< endl;
         exit(1);
     }
 }
-void subject(){
+void student::subject(){
+    cout<<"Sachin1;"<<endl;
+}
+void student::stu_data(){
 
 }
-void student(){
+void student::disSubSummary(){
 
 }
-void disSubSummary(){
-
-}
-void save(){
+void student::save(){
     ofstream outFile;
     outFile.open("outTest.txt");
 
