@@ -4,6 +4,9 @@
 #include<cstdlib>
 #include<stdio.h>
 #include<conio.h>
+#include<map>
+#include<stdlib.h>
+
 
 using namespace std;
 
@@ -26,10 +29,10 @@ class student{
         int stu_count;
         string sub;
         string current;
-
-        string subjects_A[MAXSUBJECTS];
-        string students_A[MAXSTUDENTS];
-   
+        string array[100];
+        int arr[10][100];
+        string line;
+        
     protected:
 };
 int main(){
@@ -67,46 +70,42 @@ int main(){
 void student::openFile(){
     const int size = 20 ;
     
-    int i;
+    int i,j,k;
     int count = 0;
     cout << "file is open"<<endl;
 
     ifstream stuFile;
     stuFile.open("subjdata.txt");
-    
+
+    //cout<< marks["Maths", "IT001"] <<endl;
+
     if(stuFile.is_open()){
-        while(stuFile >> subjects_A[i] >> students_A[i]){
-        	while(stuFile>> current){
-            if(current.length() == 7){
-                sub = current;
-                stuFile >> current;
-                stu_count = atoi(current.c_str());
-                cout << sub  <<endl;
+       while(!stuFile.eof()){
+            getline(stuFile,line);
+            string col_1 = line.substr(0,line.find(" "));
+            string col_2 = line.substr(col_1.length()+1,line.find(" "));
+            
+            if(col_1.length()== 7){
+                sub = col_1;
+                stu_count = atoi(col_2.c_str());
+                cout << sub << " " << stu_count << endl;
+            }else{
+                index = atoi(col_1.c_str());
+                marks = atoi(col_2.c_str());
+                cout << index << " " << marks << endl;
             }
-            else if(current.length() == 8){
-                string index = current;
-                stuFile >> current;
-                marks = atoi(current.c_str());
-                	 
-            cout << index << " " << marks<< endl;
-            }           
-            i++;
+            i++;     
         }
-        // for(int j =0; j<i; j++){
-        //     cout << subjects_A[j]<< " " << students_A[j] <<  endl;
-        // }
-        
-        }
+        stuFile.close();
     }
     else{
         cout << "Your file is not open successfully"<< endl;
         exit(1);
     }
 }
+
 void student::subject(string sub){
-    if(sub == subjects_A[].sub){
-        cout <<"";
-    }
+    
 }
 void student::stu_data(){
 
