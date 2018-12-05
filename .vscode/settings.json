@@ -3,7 +3,9 @@
         "xstring": "cpp",
         "iosfwd": "cpp",
         "iostream": "cpp",
-        "string": "cpp"
+        "string": "cpp",
+        "map": "cpp",
+        "ostream": "cpp"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }
