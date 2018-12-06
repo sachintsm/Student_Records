@@ -76,6 +76,7 @@ void subject::save(){
     sumF = (double)numF/(double)stu_count*100;
     cout<<fixed;
     cout << sub << " A- " <<setprecision(1)<<sumA <<"%"<< " B- "<<sumB <<"%"<< " C- " <<sumC <<"%"<< " D- "<< sumD <<"%"<< " F- "<<sumF<<"%" << endl;
+    
 } 
 /********************************************************************************************************/
 void subject::sub_summary(){
@@ -135,6 +136,11 @@ char student::calculate()
     else return (grade = 'F');
 }
 /********************************************************************************************************/
+void waiting(){
+    getchar();
+    getchar();
+}
+
 int main(){
     ifstream stuFile;
     int option,i=0,count = 0,sub_idx=0,index;
@@ -158,6 +164,8 @@ int main(){
     } 
     cout << "\nHello Friend, Choose your option !!!" << endl;
       do{
+            cout << "press any key to continue..." ;
+            waiting();
             cout<<"\n\t 1. Display Subject\n\t 2. Display Student\n\t 3. Display Subject Summary\n\t 4. Save Summaries\n\t 5. Exit Program" << endl;
             cout << "Choose your option : ";
             cin >> option;
@@ -175,6 +183,7 @@ int main(){
                     if(i >= sub_idx){
                         cout << "Wrong SUBCODE\n";
                     }
+                    
                     break;
                 case 2:
                     cout << "Enter the index number : ";
