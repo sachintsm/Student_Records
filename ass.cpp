@@ -1,19 +1,17 @@
 #include<fstream>
-#include<iomanip>
 #include<stdio.h>
-#include<conio.h>
 #include<string>
 #include<iostream>
 #include<stdlib.h>
 #include<cstdlib>
 #include<math.h>
-#include <typeinfo>
+#include <iomanip>
 
 using namespace std;
 
 const int MAXSUBJECTS = 10;
 const int MAXSTUDENTS = 100;
-
+/********************************************************************************************************/
 class student{
     private:
         	//function to calculate grade
@@ -26,18 +24,16 @@ class student{
             marks = mrk;
             calculate();
         }
-        char grades();
         char calculate();
         void sub_data_print();
 };
-
+/********************************************************************************************************/
 class subject{
     private:
         int numA, numB, numC, numD, numF;
-        double sumA , sumB , sumC , sumD , sumF;
         student *stuarray[MAXSTUDENTS]; 
     public:
-
+        double sumA , sumB , sumC , sumD , sumF;
         int stu_count;
         string sub;
         void save();
@@ -46,7 +42,7 @@ class subject{
         void stu_data(int);
         subject(string  input[]){
             numA = numB = numC = numD = numF = 0;
-            
+            sumA = sumB = sumC = sumD = sumF = 0;
             string col_1 = input[0].substr(0,7);
             string col_2 = input[0].substr(8,3);
             sub = col_1;
@@ -59,6 +55,7 @@ class subject{
                 int marks = atoi(col2.c_str());
                 student *stu = new student(index,marks);
 
+                //calculating grades count
                 char temp = stu->calculate();
                 if(temp == 'A') numA++;
                 else if(temp == 'B') numB++;
@@ -70,28 +67,17 @@ class subject{
             }
         }
 };
-
+/********************************************************************************************************/
 void subject::save(){
-    double sumA = sumB = sumC = sumD = sumF = 0;
-    for(int i =0; i<stu_count; i++){
-        stuarray[i]->grade;
-    }
-    sumA = numA/stu_count*100;
-    sumB = numB/stu_count*100;
-    sumC = numC/stu_count*100;
-    sumD = numD/stu_count*100;
-    sumF = numF/stu_count*100;
-
-    cout << sub << " A- " <<sumA << " B- "<<sumB << " C- " <<sumC << " D- "<< sumD << " F- "<<sumF << endl;
-
-    ofstream outFile;
-    outFile.open("summdata.txt");
-    outFile << sub << " A- " <<sumA << " B- "<<sumB << " C- " <<sumC << " D- "<< sumD << " F- "<<sumF << endl;
-    outFile.close();
-
-
+    sumA = (double) numA/(double)stu_count*100;
+    sumB = (double)numB/(double)stu_count*100;
+    sumC = (double)numC/(double)stu_count*100;
+    sumD = (double)numD/(double)stu_count*100;
+    sumF = (double)numF/(double)stu_count*100;
+    cout<<fixed;
+    cout << sub << " A- " <<setprecision(1)<<sumA <<"%"<< " B- "<<sumB <<"%"<< " C- " <<sumC <<"%"<< " D- "<< sumD <<"%"<< " F- "<<sumF<<"%" << endl;
 } 
-
+/********************************************************************************************************/
 void subject::sub_summary(){
     double average=0,stan_div=0,sum =0,total = 0;
     int num;
@@ -103,37 +89,43 @@ void subject::sub_summary(){
         total = total + ((stuarray[i]->marks - average)*(stuarray[i]->marks - average));
     }
     stan_div = sqrt(total/stu_count);
-
-    cout<<"\tAverage is :"<<average << endl;
-    cout << "\tStanderd diviation is : " << stan_div << endl;
-    cout << "\tNumber of A : " << numA << endl;
-    cout << "\tNumber of A : " << numB << endl;
-    cout << "\tNumber of A : " << numC << endl;
-    cout << "\tNumber of A : " << numD << endl;
-    cout << "\tNumber of A : " << numF << endl;
+    cout <<"-----------------------------------"<<endl;
+    cout<<"-> Average is :"<<average << endl;
+    cout <<"-----------------------------------"<<endl;
+    cout << "-> Standerd diviation is : " << stan_div << endl;
+    cout <<"-----------------------------------"<<endl;
+    cout << "-> Number of A : " << numA << endl;
+    cout << "-> Number of B : " << numB << endl;
+    cout << "-> Number of C : " << numC << endl;
+    cout << "-> Number of D : " << numD << endl;
+    cout << "-> Number of F : " << numF << endl;
+    cout <<"-----------------------------------"<<endl;
 }
+/********************************************************************************************************/
 void subject::stu_data(int index){
-    cout << "SUBJECT\t\tMARKS\tGRADE"<<endl;
     for(int i=0; i<stu_count; i++){
         if(stuarray[i]->index == index){
-            cout << sub << "\t" << stuarray[i]-> marks << "\t" << stuarray[i]->grade << endl;
+            cout <<"| "<< sub << "\t|  " << stuarray[i]-> marks << "    |     " << stuarray[i]->grade <<"    |"<< endl;
             return;
         }
     }
     cout << sub << " Student is not found" << endl;
 }
-
+/********************************************************************************************************/
 void student::sub_data_print(){
-    cout << index << "|\t  " << marks << "|\t " << calculate() << endl;
+    cout << "| " <<index << "    |   " << marks << "   |   " << calculate() << "   |"<< endl;
 }
-
+/********************************************************************************************************/
 void subject::sub_details(){
-    cout << "INDEX \t\tMARKS \tGRADE"<< endl;
-    cout << "-----------------------------" << endl;
+    cout << "--------------------------------" << endl;
+    cout << "|  INDEX     | MARKS  | GRADE  |"<< endl;
+    cout << "--------------------------------" << endl;
     for(int i=0; i < stu_count; i++){
         stuarray[i]->sub_data_print();
     }
+    cout << "--------------------------------" << endl;
 }
+/********************************************************************************************************/
 char student::calculate()
 {
 	if(marks >= 70) return (grade='A');
@@ -142,16 +134,13 @@ char student::calculate()
     else if(marks >= 30) return (grade = 'D');
     else return (grade = 'F');
 }
-
-
+/********************************************************************************************************/
 int main(){
     ifstream stuFile;
-    int option,i=0,count = 0,sub_idx=0;
-    string array[MAXSTUDENTS * MAXSUBJECTS];
+    int option,i=0,count = 0,sub_idx=0,index;
+    string array[MAXSTUDENTS * MAXSUBJECTS],line,subcode;
     subject * subarray[MAXSUBJECTS];
-    string line;
     
-
     stuFile.open("subjdata.txt");
     if(stuFile.is_open()){
         while(getline(stuFile,line)){
@@ -166,16 +155,14 @@ int main(){
         string col_2 = array[i].substr(8,3);
         int j = atoi(col_2.c_str());
         i += (j+1);
-    }
-    string subcode;
-    int index; 
+    } 
     cout << "\nHello Friend, Choose your option !!!" << endl;
       do{
             cout<<"\n\t 1. Display Subject\n\t 2. Display Student\n\t 3. Display Subject Summary\n\t 4. Save Summaries\n\t 5. Exit Program" << endl;
+            cout << "Choose your option : ";
             cin >> option;
             switch(option){
                 case 1:
-                    
                     cout << "Enter the subject code : " ;
                     cin >> subcode;
 
@@ -188,14 +175,17 @@ int main(){
                     if(i >= sub_idx){
                         cout << "Wrong SUBCODE\n";
                     }
-
                     break;
                 case 2:
                     cout << "Enter the index number : ";
                     cin >> index;
+                    cout<<"------------------------------------"<<endl;
+                    cout << "| SUBJECT\t| MARKS  |   GRADE  |"<<endl;
+                    cout<<"------------------------------------"<<endl;
                     for(i=0; i<sub_idx; i++){
                         subarray[i]->stu_data(index);
                     }
+                    cout<<"------------------------------------"<<endl;
                     break;
                 case 3:
                     cout << "Enter the subject code : ";
@@ -206,16 +196,21 @@ int main(){
                         }
                     }
                     break;
-                case 4:
-                    for(i=0; i<sub_idx; i++){
+                case 4:{
+                    ofstream sutFile;
+                    sutFile.open("summdata.txt");
+                    for(int i=0; i<sub_idx; i++){
                         subarray[i]->save();
+                        sutFile << subarray[i]->sub << " A- " <<subarray[i]->sumA <<"%"<< " B- "<<subarray[i]->sumB <<"%"<< " C- "<<subarray[i]->sumC <<"%"<< " D- "<< subarray[i]->sumD <<"%"<< " F- "<<subarray[i]->sumF<<"%" << endl;
                     }
+                    sutFile.close();
                     break;
+                }
                 case 5:
                     return EXIT_FAILURE;
                     break;
                 default:
-                cout<<"Please, Enter valid option !" << endl;
+                    cout<<"Please, Enter valid option !" << endl;
             }
         }while(option != 5);
     return 0;
