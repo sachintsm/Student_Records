@@ -137,10 +137,10 @@ char student::calculate()
 }
 /********************************************************************************************************/
 void waiting(){
-    getchar();
-    getchar();
+    system ("pause");
+    system ("cls");
 }
-
+/*******************************************************************************************************/
 int main(){
     ifstream stuFile;
     int option,i=0,count = 0,sub_idx=0,index;
@@ -162,10 +162,9 @@ int main(){
         int j = atoi(col_2.c_str());
         i += (j+1);
     } 
-    cout << "\nHello Friend, Choose your option !!!" << endl;
-      do{
-            cout << "press any key to continue..." ;
+        do{
             waiting();
+            cout << "*************MENU************" << endl;
             cout<<"\n\t 1. Display Subject\n\t 2. Display Student\n\t 3. Display Subject Summary\n\t 4. Save Summaries\n\t 5. Exit Program" << endl;
             cout << "Choose your option : ";
             cin >> option;
@@ -212,6 +211,7 @@ int main(){
                         subarray[i]->save();
                         sutFile << subarray[i]->sub << " A- " <<subarray[i]->sumA <<"%"<< " B- "<<subarray[i]->sumB <<"%"<< " C- "<<subarray[i]->sumC <<"%"<< " D- "<< subarray[i]->sumD <<"%"<< " F- "<<subarray[i]->sumF<<"%" << endl;
                     }
+                    cout << "\nData successfully saved in sumdata.txt file\n" << endl;
                     sutFile.close();
                     break;
                 }
@@ -224,3 +224,4 @@ int main(){
         }while(option != 5);
     return 0;
 }
+/*********************************************************************************************************/
