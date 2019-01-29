@@ -11,6 +11,7 @@ using namespace std;
 
 const int MAXSUBJECTS = 10;
 const int MAXSTUDENTS = 100;
+
 /********************************************************************************************************/
 class student{
     private:
